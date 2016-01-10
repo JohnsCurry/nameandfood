@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title} Enter your information and then add '/foods' to the url
+  label(for="name") Name: 
+  input(type="text", id="name")
+  br
+  br
+  label(for="food") Favorite Food: 
+  input(type="text", id="food")
+  br
+  button(id="submit") Submit
+
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+  script(src="/javascripts/main.js")
