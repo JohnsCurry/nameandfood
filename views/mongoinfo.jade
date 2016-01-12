@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  h1.
+    Users Information
+  ul
+    each user, i in mongoinfo
+      li
+        = user.username
+        = user.food

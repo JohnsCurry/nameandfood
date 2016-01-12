@@ -18,6 +18,41 @@ router.get('/results', function(req, res){
 
 });
 
+router.post('/addinfo', function(req, res){
+
+  // Set our internal DB variable
+  var db = req.db;
+
+  var userName = req.body.username;
+  var food     = req.body.food;
+
+  var collection = db.get('userinfo');
+
+  //Submit to the DB
+  collection.insert({
+    "username" : userName,
+    "food"     : food
+  }, function(err, doc) {
+    if (err) {
+      //If it failed, return error
+      res.send("There was a problem adding the information to the database");
+    } else {
+      // Forward to success page
+      res.redirect('/mongoinfo');
+    }
+  });
+});
+
+router.get('/mongoinfo', function(req, res) {
+  var db = req.db;
+  var collection = db.get('userinfo');
+  collection.find({}, {}, function(e, docs){
+    res.render('mongoinfo', {
+      "mongoinfo": docs
+    });
+  });
+});
+
 router.get('/foods', function(req, res){
   res.render('foods.jade');
 });
